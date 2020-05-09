@@ -2,7 +2,7 @@ pipeline {
     agent {
                 docker {
                     image 'circleci/python:3.7'
-                    args '-u root:sudo'
+                    args '-u root:root'
                 }
             }
 
