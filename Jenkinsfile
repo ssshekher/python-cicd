@@ -35,6 +35,7 @@ pipeline {
                              //      onlyStable: false,
                              //      sourceEncoding: 'ASCII',
                              //      zoomCoverageChart: false])
+                   sh 'flake8_junit test-reports/flake8/flake8.txt test-reports/flake8/flake8_junit.xml'
                    junit 'test-reports/flake8/flake8_junit.xml'
                 }
             }
