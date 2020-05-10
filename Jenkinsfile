@@ -16,12 +16,14 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                sh 'flake8 --exclude=venv* --statistics'                       
+                sh 'flake8 --exclude=venv* --statistics --output-file=test-reports/flake8/flake8.txt'
+                sh 'flake8_junit test-reports/flake8/flake8.txt test-reports/flake8/flake8_junit.xml'                       
                 sh 'pytest -v --cov=calculator --junit-xml test-reports/results.xml --cov-report xml:test-reports/coverage.xml'
             }
             post {
                 always {
                     junit 'test-reports/results.xml'
+                    junit 'test-reports/flake8/flake8_junit.xml'
                     step([$class: 'CoberturaPublisher',
                                    autoUpdateHealth: false,
                                    autoUpdateStability: false,
