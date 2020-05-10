@@ -17,11 +17,22 @@ pipeline {
         stage('Run Tests') {
             steps {
                 sh 'flake8 --exclude=venv* --statistics'                       
-                sh 'pytest -v --cov=calculator --junit-xml test-reports/results.xml'
+                sh 'pytest -v --cov=calculator --junit-xml test-reports/results.xml --cov-report xml:test-reports/coverage.xml'
             }
             post {
                 always {
-                    junit 'test-reports/results.xml'
+                    //junit 'test-reports/results.xml'
+                    step([$class: 'CoberturaPublisher',
+                                   autoUpdateHealth: false,
+                                   autoUpdateStability: false,
+                                   coberturaReportFile: 'test-reports/coverage.xml',
+                                   failNoReports: false,
+                                   failUnhealthy: false,
+                                   failUnstable: false,
+                                   maxNumberOfBuilds: 10,
+                                   onlyStable: false,
+                                   sourceEncoding: 'ASCII',
+                                   zoomCoverageChart: false])
                 }
             }
         }
