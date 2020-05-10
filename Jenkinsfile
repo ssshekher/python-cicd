@@ -17,7 +17,12 @@ pipeline {
         stage('Run Tests') {
             steps {
                 sh 'flake8 --exclude=venv* --statistics'                       
-                sh 'pytest -v --cov=calculator'
+                sh 'pytest -v --cov=calculator --junit-xml test-reports/results.xml'
+            }
+            post {
+                always {
+                    junit 'test-reports/results.xml'
+                }
             }
         }
 
