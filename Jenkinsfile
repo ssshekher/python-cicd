@@ -24,7 +24,7 @@ pipeline {
             post {
                 always {
                     junit 'test-reports/results.xml'
-                    junit 'test-reports/flake8/flake8_junit.xml'
+                    //junit 'test-reports/flake8/flake8_junit.xml'
                     step([$class: 'CoberturaPublisher',
                                    autoUpdateHealth: false,
                                    autoUpdateStability: false,
