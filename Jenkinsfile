@@ -23,8 +23,7 @@ pipeline {
             }
             post {
                 always {
-                    junit 'test-reports/results.xml test-reports/flake8/flake8_junit.xml'
-                    //junit 'test-reports/flake8/flake8_junit.xml'
+                    junit 'test-reports/results.xml'
                     step([$class: 'CoberturaPublisher',
                                    autoUpdateHealth: false,
                                    autoUpdateStability: false,
@@ -36,6 +35,7 @@ pipeline {
                                    onlyStable: false,
                                    sourceEncoding: 'ASCII',
                                    zoomCoverageChart: false])
+                   junit 'test-reports/flake8/flake8_junit.xml'
                 }
             }
         }
