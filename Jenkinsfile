@@ -23,18 +23,18 @@ pipeline {
             }
             post {
                 always {
-                    junit 'test-reports/results.xml'
-                    step([$class: 'CoberturaPublisher',
-                                   autoUpdateHealth: false,
-                                   autoUpdateStability: false,
-                                   coberturaReportFile: 'test-reports/coverage.xml',
-                                   failNoReports: false,
-                                   failUnhealthy: false,
-                                   failUnstable: false,
-                                   maxNumberOfBuilds: 10,
-                                   onlyStable: false,
-                                   sourceEncoding: 'ASCII',
-                                   zoomCoverageChart: false])
+                   // junit 'test-reports/results.xml'
+                   // step([$class: 'CoberturaPublisher',
+                     //              autoUpdateHealth: false,
+                       //            autoUpdateStability: false,
+                         //          coberturaReportFile: 'test-reports/coverage.xml',
+                           //        failNoReports: false,
+                             //      failUnhealthy: false,
+                             //      failUnstable: false,
+                             //      maxNumberOfBuilds: 10,
+                             //      onlyStable: false,
+                             //      sourceEncoding: 'ASCII',
+                             //      zoomCoverageChart: false])
                    junit 'test-reports/flake8/flake8_junit.xml'
                 }
             }
