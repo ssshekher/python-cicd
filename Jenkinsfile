@@ -1,7 +1,7 @@
 pipeline {
     agent {
                 docker {
-                    image 'qnib/pytest'
+                    image 'jchaudhu/pytest:t4'
                     args '-u root:root'
                 }
             }
