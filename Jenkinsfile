@@ -18,7 +18,7 @@ pipeline {
             steps {
                 sh 'rm -rf test-reports/flake8'
                 sh 'mkdir -p test-reports/flake8'
-                sh 'flake8 --output-file=test-reports/flake8/flake8.txt'
+                sh 'flake8 --exclude=venv* --statistics --output-file=test-reports/flake8/flake8.txt'
                 sh 'flake8_junit test-reports/flake8/flake8.txt test-reports/flake8/flake8_junit.xml'                       
                 sh 'pytest -v --cov=calculator --junit-xml test-reports/results.xml --cov-report xml:test-reports/coverage.xml'
             }
@@ -37,7 +37,7 @@ pipeline {
                                    sourceEncoding: 'ASCII',
                                    zoomCoverageChart: false])
                    //sh 'flake8_junit test-reports/flake8/flake8.txt test-reports/flake8/flake8_junit.xml'
-                   junit 'test-reports/flake8/flake8_junit.xml'
+                   junit allowEmptyResults: true, testResults: 'test-reports/flake8/flake8_junit.xml'
                 }
             }
         }
