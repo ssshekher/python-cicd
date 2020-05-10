@@ -1,7 +1,7 @@
 pipeline {
     agent {
                 docker {
-                    image 'circleci/python:3.7'
+                    image 'qnib/pytest'
                     args '-u root:root'
                 }
             }
